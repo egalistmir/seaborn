@@ -27,7 +27,10 @@ before_install:
   - hash -r
   - conda config --set always_yes yes --set changeps1 no 
   - conda config --add channels conda-forge
-  - conda update -q conda
+  # TODO Re-enable on resolution to conda/conda#9583
+  # - conda update -q conda  
+  # TODO remove after re-enabling above line
+  - conda install -q conda=4.6.14  
   - conda config --set channel_priority false
   - conda info -a
 
@@ -37,6 +40,10 @@ install:
   - source activate testenv
   - cat testing/deps_${DEPS}.txt testing/utils.txt > deps.txt
   - conda install --file deps.txt
+  # TODO address broken conda-forge package for v45
+  - if [ $PYTHON == "2.7" ]; then
+    conda install setuptools=44;  
+    fi
   - pip install .
 
 

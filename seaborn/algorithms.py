@@ -76,7 +76,7 @@ def bootstrap(*args, **kwargs):
     else:
         f = func
 
-    # Handle numpy changes
+    # Handle numpy 1.17 changes
     try:
         integers = rng.integers
     except AttributeError:
